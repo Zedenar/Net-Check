@@ -6,9 +6,11 @@ nm = nmap.PortScanner()
 while True:
     nm.scan(hosts='192.168.2.0/24', arguments='-sn -A -sP -PE') #  Make sure to change " hosts='<change this>' ", 
                                                                 #  and perhaps also the arguments if you wish to do so.
-                                                                #  https://pypi.org/project/python-nmap/
-    os.system('clear')
-    print(iplist)
+    try:                                                        #  https://pypi.org/project/python-nmap/
+        os.system('clear')  # Linux/Unix 
+    except:
+        os.system('cls')  # Windows
+        
     print(5*"-", "Active IP's in the Network", 5*"-", "Ctrl+c to quit")
     for host in nm.all_hosts():
         if nm[host].state() == 'up':
